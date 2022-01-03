@@ -6,4 +6,4 @@ const sequelize = new Sequelize("pogz", "postgres", "123456", {
   logging: console.log,
 });
 
-module.exports = { sequelize };
+module.exports = sequelize;
