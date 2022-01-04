@@ -1,6 +1,4 @@
-const db = require("./config");
-
-require("./models");
+const db = require("./models/index");
 
 db.sync();
 

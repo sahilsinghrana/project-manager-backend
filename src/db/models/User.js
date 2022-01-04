@@ -4,11 +4,6 @@ const db = require("../config");
 const User = db.define(
   "user",
   {
-    id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      primaryKey: true,
-    },
     first_name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -19,6 +14,7 @@ const User = db.define(
         },
       },
     },
+
     last_name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -29,6 +25,7 @@ const User = db.define(
         },
       },
     },
+
     email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -41,6 +38,7 @@ const User = db.define(
         isEmail: true,
       },
     },
+
     password: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -50,9 +48,6 @@ const User = db.define(
           msg: "Password cannot be empty",
         },
       },
-    },
-    token: {
-      type: DataTypes.STRING,
     },
   },
   {
@@ -64,7 +59,5 @@ const User = db.define(
     freezeTableName: true,
   }
 );
-
-User.sync();
 
 module.exports = User;
