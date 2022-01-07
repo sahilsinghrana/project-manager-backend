@@ -54,5 +54,8 @@ module.exports.deleteProject = (req, res) => {
 
 module.exports.findProject = (req, res) => {
   const { projectId } = req.params;
+
+  if (!projectId) return errorHandler(res, 403, {}, "Project Id is Required");
+
   res.send(`${projectId} is what you looking for`);
 };
