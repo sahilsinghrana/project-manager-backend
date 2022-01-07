@@ -1,10 +1,7 @@
 const router = require("express").Router();
 
-const verifyToken = require("../middleware/verifyToken");
-const auth = require("./auth");
-const projects = require("./projects");
+const v1 = require("./v1");
 
-router.use("/", auth);
-router.use("/project", verifyToken, projects);
+router.use("/v1", v1);
 
 module.exports = router;

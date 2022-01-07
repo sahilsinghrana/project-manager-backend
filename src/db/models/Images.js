@@ -1,17 +1,18 @@
 const { DataTypes } = require("sequelize");
+
 const db = require("../config");
 
-const Project = db.define(
-  "project",
+const Images = db.define(
+  "Images",
   {
     name: {
       type: DataTypes.STRING,
+      defaultValue: Date.now().toLocaleString(),
+    },
+    url: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
-  },
-  {
-    // For the sake of clarity we specify our indexes
-    indexes: [{ unique: true, fields: ["id"] }],
   },
   {
     timestamps: true,
@@ -19,4 +20,4 @@ const Project = db.define(
   }
 );
 
-module.exports = Project;
+module.exports = Images;

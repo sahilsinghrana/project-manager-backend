@@ -1,4 +1,4 @@
-const Project = require("../db/models/projects");
+const Project = require("../db/models/Project");
 const { successHandler, errorHandler } = require("../utils/reponseHandler");
 
 module.exports.getAllProjects = async (req, res) => {
@@ -28,14 +28,14 @@ module.exports.createProject = async (req, res) => {
 };
 
 module.exports.updateProject = async (req, res) => {
-  const { name, projectId } = req.body;
+  const { name, id } = req.body;
 
-  if (!name || !projectId)
-    return errorHandler(res, 300, {}, "Name and projectId is required");
+  if (!name || !id)
+    return errorHandler(res, 300, {}, "Name and id is required");
 
   const project = await Project.findOne({
     where: {
-      id: projectId,
+      id: id,
     },
   });
 
@@ -52,10 +52,10 @@ module.exports.deleteProject = (req, res) => {
   res.send("Delete Project");
 };
 
-module.exports.findProject = (req, res) => {
-  const { projectId } = req.params;
+module.exports.getSingleProject = (req, res) => {
+  const { id } = req.params;
 
-  if (!projectId) return errorHandler(res, 403, {}, "Project Id is Required");
+  if (!id) return errorHandler(res, 403, {}, "Project Id is Required");
 
-  res.send(`${projectId} is what you looking for`);
+  res.send(`${id} is what you looking for`);
 };
