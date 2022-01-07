@@ -19,7 +19,7 @@ module.exports.createProject = async (req, res) => {
   try {
     const project = await Project.create({
       name: name,
-      userId: req.user.id,
+      createdBy: req.user.id,
     });
     successHandler(res, project, "Project Created Successfully.");
   } catch (err) {

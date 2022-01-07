@@ -61,7 +61,6 @@ class AuthController {
 
   static async register(req, res) {
     const { email, password, first_name, last_name } = req.body;
-    console.log(req.body);
     try {
       const passHash = await generateHash(password);
       const user = await User.create({
@@ -69,7 +68,6 @@ class AuthController {
         email: email,
         first_name,
         last_name,
-        token,
       });
 
       res.status(200).json(user);
