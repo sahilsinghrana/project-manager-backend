@@ -1,0 +1,1 @@
+const asyncWrapper = (fn) => {};

@@ -1,5 +1,5 @@
-module.exports.successHandler = (res, status, data, message) => {
-  res.status(status).json({
+module.exports.successHandler = (res, data, message) => {
+  res.status(200).json({
     message,
     data,
   });

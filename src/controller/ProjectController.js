@@ -4,8 +4,7 @@ const { successHandler, errorHandler } = require("../utils/reponseHandler");
 module.exports.getAllProjects = async (req, res) => {
   try {
     const projects = await Project.findAndCountAll();
-
-    successHandler(res, 200, projects);
+    successHandler(res, projects);
   } catch (err) {
     errorHandler(res, 500, err, err.message);
   }
@@ -22,18 +21,31 @@ module.exports.createProject = async (req, res) => {
       name: name,
       userId: req.user.id,
     });
-
-    successHandler(res, 200, project);
+    successHandler(res, project, "Project Created Successfully.");
   } catch (err) {
     errorHandler(res, 500, err, err.message);
   }
-  res.send("Create Project Route");
 };
 
-module.exports.updateProject = (req, res) => {
+module.exports.updateProject = async (req, res) => {
   const { name, projectId } = req.body;
 
-  res.send("Update Project Route!");
+  if (!name || !projectId)
+    return errorHandler(res, 300, {}, "Name and projectId is required");
+
+  const project = await Project.findOne({
+    where: {
+      id: projectId,
+    },
+  });
+
+  if (!project) return errorHandler(res, 404, {}, "No Projects Found");
+
+  project.update({
+    name: name,
+  });
+
+  successHandler(res, project, "Project Updated Successfully");
 };
 
 module.exports.deleteProject = (req, res) => {
